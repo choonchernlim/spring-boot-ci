@@ -130,6 +130,14 @@
 
         <plugins>
             <!--
+            Enable Spring Boot support.
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!--
             Versions Maven Plugin - Makes it easier to upgrade plugins and dependencies
             http://www.mojohaus.org/versions-maven-plugin/
             -->

@@ -43,6 +43,7 @@ mvn clean test site -Possrh-deploy
 
 ## Build Plugins 
 
+* [Spring Boot Maven Plugin](http://docs.spring.io/spring-boot/docs/current/maven-plugin/) - Enable Spring Boot support.
 * [Versions Maven plugin](http://www.mojohaus.org/versions-maven-plugin/) - Handles dependencies and plugins date.
 * [Surefire Maven Plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) - Runs unit tests.
 * [Maven Failsafe Plugin](http://maven.apache.org/surefire/maven-failsafe-plugin/) - Runs integration tests.
