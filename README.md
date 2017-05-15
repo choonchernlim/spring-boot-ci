@@ -1,15 +1,16 @@
 # spring-boot-ci
 
-This parent POM extends `spring-boot-starter-parent` and generates static code analysis reports for Maven site and 
-Continuous Integration Servers ([Jenkins](https://jenkins-ci.org/), etc). 
+This parent POM:-
+ 
+* Consolidates static code analysis report configuration in one place and declutters app's `pom.xml`.
+* Generates reports for Continuous Integration servers ([Jenkins](https://jenkins-ci.org/), etc) and Maven site. 
+* Enables Spring Boot by inheriting from the `spring-boot-starter-parent` to leverage the full power of Spring Boot.
+    * While an app may enable Spring Boot without inheriting from the `spring-boot-starter-parent`, it can only leverage Spring Boot's dependency management but not the plugin management. Furthermore, it requires the app to re-configure several plugins used by Spring Boot to continue working properly.
+* Includes a Maven profile to deploy:-
+    * Project artifacts to [Sonatype OSSRH (OSS Repository Hosting)](https://oss.sonatype.org).
+    * Maven generated site to project [GitHub](https://github.com/) page.
 
-It also includes a profile that allows you to push:-
-* project artifacts to [Sonatype OSSRH (OSS Repository Hosting)](https://oss.sonatype.org).
-* Maven generated site to project [GitHub](https://github.com/) page.
-
-## How to Use
-
-Add the following configuration to your project's pom.xml:-
+## Parent POM Dependency
 
 ```xml
 <project ...>
@@ -40,10 +41,6 @@ mvn clean deploy -Possrh-deploy
 mvn clean test site -Possrh-deploy
 ```
 
-## Important Notes
-
-* If the JaCoCo web report is not rendering properly in the GitHub page, please read this post for solution: [JaCoCo Web Report Not Rendering Properly in GitHub Pages](http://myshittycode.com/2015/07/22/jacoco-web-report-not-rendering-properly-in-github-pages/)                                    
-
 ## Build Plugins 
 
 * [Versions Maven plugin](http://www.mojohaus.org/versions-maven-plugin/) - Handles dependencies and plugins date.
@@ -71,4 +68,9 @@ mvn clean test site -Possrh-deploy
 * [GitHub Site Plugin](https://github.com/github/maven-plugins) - Generates Maven site in project GitHub page.
 * [Maven Javadoc Plugin](https://maven.apache.org/plugins/maven-javadoc-plugin/) - Generates Javadoc.
 * [Maven GPG Plugin](http://maven.apache.org/plugins/maven-gpg-plugin/) - Signs all of the project's attached artifacts with GnuPG..
+
+## Troubleshooting
+
+* If the JaCoCo web report is not rendering properly in the GitHub page, please read this post for solution: [JaCoCo Web Report Not Rendering Properly in GitHub Pages](http://myshittycode.com/2015/07/22/jacoco-web-report-not-rendering-properly-in-github-pages/)                                    
+
 
