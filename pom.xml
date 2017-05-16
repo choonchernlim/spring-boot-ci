@@ -12,7 +12,7 @@
 
     <groupId>com.github.choonchernlim</groupId>
     <artifactId>spring-boot-ci</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot CI</name>
@@ -50,6 +50,9 @@
     <properties>
         <maven.version>3.3.9</maven.version>
 
+        <jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.reportPath>
+        <jacoco.itReportPath>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.itReportPath>
+
         <!-- Plugin versions (only those that are not defined in `spring-boot-starter-parent`) -->
         <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
         <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
@@ -62,9 +65,7 @@
         <site-maven-plugin.version>0.12</site-maven-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <keytool-maven-plugin.version>1.5</keytool-maven-plugin.version>
-
-        <jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.reportPath>
-        <jacoco.itReportPath>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.itReportPath>
+        <maven-surefire-report-plugin.version>2.20</maven-surefire-report-plugin.version>
     </properties>
 
     <build>
@@ -124,6 +125,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>keytool-maven-plugin</artifactId>
                     <version>${keytool-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-report-plugin</artifactId>
+                    <version>${maven-surefire-report-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
