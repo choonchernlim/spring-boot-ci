@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.1 - XXXX
+
+* Configured `mvn package` to generate source JAR file.
+
 ## 0.2.0 - 2017-01-16
 
 * Upgraded Spock from 1.0 to 1.1 to get `@SpringBootTest` to work.

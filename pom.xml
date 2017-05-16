@@ -12,7 +12,8 @@
 
     <groupId>com.github.choonchernlim</groupId>
     <artifactId>spring-boot-ci</artifactId>
-    <version>0.2.0</version>
+    <!-- TODO LIMC deploy non-snapshot -->
+    <version>0.2.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot CI</name>
@@ -153,6 +154,7 @@
         <plugins>
             <!--
             Use Groovy compiler.
+            https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin
             -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -178,7 +180,7 @@
 
             <!--
             Handle possible missing `src/main/java` and `src/test/java` when using Groovy.
-            See https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin
+            https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin
             -->
             <plugin>
                 <groupId>org.codehaus.groovy</groupId>
@@ -188,6 +190,7 @@
 
             <!--
             Enable Spring Boot support.
+            http://docs.spring.io/spring-boot/docs/current/maven-plugin/
             -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -357,6 +360,10 @@
                 </executions>
             </plugin>
 
+            <!--
+            Maven Enforcer Plugin - Bans certain dependencies and ensure minimum Maven version is used.
+            http://maven.apache.org/enforcer/maven-enforcer-plugin/
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -404,6 +411,23 @@
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+            Maven Source Plugin - Generates source JAR file.
+            https://maven.apache.org/plugins/maven-source-plugin/
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
