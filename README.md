@@ -6,6 +6,7 @@ This parent POM:-
 * Generates reports for Continuous Integration servers ([Jenkins](https://jenkins-ci.org/), etc) and Maven site. 
 * Enables Spring Boot by inheriting from the `spring-boot-starter-parent` to leverage the full power of Spring Boot.
     * While an app may enable Spring Boot without inheriting from the `spring-boot-starter-parent`, it can only leverage Spring Boot's dependency management but not the plugin management. Furthermore, it requires the app to re-configure several plugins used by Spring Boot to continue working properly.
+* Enables Groovy compiler.
 * Includes a Maven profile to deploy:-
     * Project artifacts to [Sonatype OSSRH (OSS Repository Hosting)](https://oss.sonatype.org).
     * Maven generated site to project [GitHub](https://github.com/) page.
@@ -17,7 +18,7 @@ This parent POM:-
     <parent>
         <groupId>com.github.choonchernlim</groupId>
         <artifactId>spring-boot-ci</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
     </parent>
     ...
 </project>
@@ -43,12 +44,15 @@ mvn clean test site -Possrh-deploy
 
 ## Build Plugins 
 
-* [Spring Boot Maven Plugin](http://docs.spring.io/spring-boot/docs/current/maven-plugin/) - Enable Spring Boot support.
+* [Maven Compiler Plugin](https://maven.apache.org/plugins/maven-compiler-plugin/) - Enables Groovy compiler.
+* [Groovy Eclipse Maven Plugin](https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin) - Handles possible missing `src/main/java` and `src/test/java` when using Groovy.
+* [Spring Boot Maven Plugin](http://docs.spring.io/spring-boot/docs/current/maven-plugin/) - Enables Spring Boot support.
 * [Versions Maven plugin](http://www.mojohaus.org/versions-maven-plugin/) - Handles dependencies and plugins date.
 * [Surefire Maven Plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) - Runs unit tests.
 * [Maven Failsafe Plugin](http://maven.apache.org/surefire/maven-failsafe-plugin/) - Runs integration tests.
 * [Maven Site Plugin](http://maven.apache.org/plugins/maven-site-plugin/) - Generates site.
 * [JaCoCo Maven Plugin](http://www.eclemma.org/jacoco/) - Code coverage report for JVM languages.
+* [Maven Enforcer Plugin](http://maven.apache.org/enforcer/maven-enforcer-plugin/) Bans certain dependencies and ensures minimum Maven version is met.
 
 ## Reporting Plugins 
 
