@@ -12,7 +12,7 @@
 
     <groupId>com.github.choonchernlim</groupId>
     <artifactId>spring-boot-ci</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot CI</name>
@@ -48,10 +48,21 @@
     </scm>
 
     <properties>
+        <java.version>1.8</java.version>
+
+        <groovy-eclipse-compiler.version>2.9.2-01</groovy-eclipse-compiler.version>
+        <groovy-eclipse-batch.version>2.4.3-01</groovy-eclipse-batch.version>
+
         <maven.version>3.3.9</maven.version>
 
         <jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.reportPath>
         <jacoco.itReportPath>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.itReportPath>
+
+        <!--
+        To get Spock to work with @SpringBootTest.
+        See https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html#boot-features-testing-spring-boot-applications-with-spock
+        -->
+        <spock.version>1.1-groovy-2.4</spock.version>
 
         <!-- Plugin versions (only those that are not defined in `spring-boot-starter-parent`) -->
         <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
@@ -131,16 +142,63 @@
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>${maven-surefire-report-plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-eclipse-compiler</artifactId>
+                    <version>${groovy-eclipse-compiler.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
         <plugins>
+            <!--
+            Use Groovy compiler.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerId>groovy-eclipse-compiler</compilerId>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-compiler</artifactId>
+                        <version>${groovy-eclipse-compiler.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-batch</artifactId>
+                        <version>${groovy-eclipse-batch.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!--
+            Handle possible missing `src/main/java` and `src/test/java` when using Groovy.
+            See https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin
+            -->
+            <plugin>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-eclipse-compiler</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+
             <!--
             Enable Spring Boot support.
             -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--
+                    Create 2 artifacts: one as dependency and another as executable fat JAR
+                    See https://docs.spring.io/spring-boot/docs/current/reference/html/howto-build.html#howto-create-an-additional-executable-jar
+                    -->
+                    <classifier>exec</classifier>
+                </configuration>
             </plugin>
 
             <!--
@@ -298,6 +356,57 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <!--
+                    If these banned dependencies exist, fail the build right away.
+
+                    Xalan, Xerces and Xml-APIs - Known to cause problem when deployed to server. Use the ones
+                    provided by server.
+                    See http://stackoverflow.com/questions/11677572/dealing-with-xerces-hell-in-java-maven
+
+                    Joda Time - Use Java 8's built-in Date and Time API.
+                    -->
+                    <execution>
+                        <id>enforce-banned-dependencies</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <fail>true</fail>
+                            <rules>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>xalan</exclude>
+                                        <exclude>xerces</exclude>
+                                        <exclude>xml-apis</exclude>
+                                        <exclude>joda-time</exclude>
+                                    </excludes>
+                                </bannedDependencies>
+                            </rules>
+                        </configuration>
+                    </execution>
+                    <!--
+                    Ensures everyone is using at least the specified Maven version or later.
+                    -->
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${maven.version}</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -449,6 +558,18 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <repositories>
+        <!--
+        To fix "Failure to find com.gemstone.gemfire:gemfire:pom:x.x.x" error thrown by
+        `maven-project-info-reports-plugin`
+        -->
+        <repository>
+            <id>spring-plugins-repository</id>
+            <name>Spring Plugins Repository</name>
+            <url>http://repo.spring.io/plugins-release/</url>
+        </repository>
+    </repositories>
 
     <profiles>
         <!--
