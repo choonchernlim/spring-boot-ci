@@ -65,6 +65,9 @@
         -->
         <spock.version>1.1-groovy-2.4</spock.version>
 
+        <!-- Dependency versions (only those that are not defined in `spring-boot-starter-parent`) -->
+        <cglib-nodep.version>3.2.5</cglib-nodep.version>
+
         <!-- Plugin versions (only those that are not defined in `spring-boot-starter-parent`) -->
         <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
         <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
@@ -79,6 +82,16 @@
         <keytool-maven-plugin.version>1.5</keytool-maven-plugin.version>
         <maven-surefire-report-plugin.version>2.20</maven-surefire-report-plugin.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib-nodep</artifactId>
+                <version>${cglib-nodep.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
