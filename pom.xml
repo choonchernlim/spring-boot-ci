@@ -12,7 +12,7 @@
 
     <groupId>com.github.choonchernlim</groupId>
     <artifactId>spring-boot-ci</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot CI</name>
@@ -20,10 +20,6 @@
         2) deploy artifacts to Sonatype OSSRH, and 3) deploy site documentation to GitHub.
     </description>
     <url>https://github.com/choonchernlim/spring-boot-ci</url>
-
-    <prerequisites>
-        <maven>${maven.version}</maven>
-    </prerequisites>
 
     <licenses>
         <license>
@@ -64,6 +60,9 @@
         -->
         <spock.version>1.1-groovy-2.4</spock.version>
 
+        <!-- Dependency versions (only those that are not defined in `spring-boot-starter-parent`) -->
+        <cglib-nodep.version>3.2.5</cglib-nodep.version>
+
         <!-- Plugin versions (only those that are not defined in `spring-boot-starter-parent`) -->
         <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
         <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
@@ -78,6 +77,16 @@
         <keytool-maven-plugin.version>1.5</keytool-maven-plugin.version>
         <maven-surefire-report-plugin.version>2.20</maven-surefire-report-plugin.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib-nodep</artifactId>
+                <version>${cglib-nodep.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
@@ -153,6 +162,7 @@
         <plugins>
             <!--
             Use Groovy compiler.
+            https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin
             -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -178,7 +188,7 @@
 
             <!--
             Handle possible missing `src/main/java` and `src/test/java` when using Groovy.
-            See https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin
+            https://github.com/groovy/groovy-eclipse/wiki/Groovy-Eclipse-Maven-plugin
             -->
             <plugin>
                 <groupId>org.codehaus.groovy</groupId>
@@ -188,6 +198,7 @@
 
             <!--
             Enable Spring Boot support.
+            http://docs.spring.io/spring-boot/docs/current/maven-plugin/
             -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -357,6 +368,10 @@
                 </executions>
             </plugin>
 
+            <!--
+            Maven Enforcer Plugin - Bans certain dependencies and ensure minimum Maven version is used.
+            http://maven.apache.org/enforcer/maven-enforcer-plugin/
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -404,6 +419,23 @@
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+            Maven Source Plugin - Generates source JAR file.
+            https://maven.apache.org/plugins/maven-source-plugin/
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

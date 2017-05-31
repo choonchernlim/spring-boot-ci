@@ -18,7 +18,7 @@ This parent POM:-
     <parent>
         <groupId>com.github.choonchernlim</groupId>
         <artifactId>spring-boot-ci</artifactId>
-        <version>0.2.0</version>
+        <version>0.2.1</version>
     </parent>
     ...
 </project>
@@ -53,6 +53,7 @@ mvn clean test site -Possrh-deploy
 * [Maven Site Plugin](http://maven.apache.org/plugins/maven-site-plugin/) - Generates site.
 * [JaCoCo Maven Plugin](http://www.eclemma.org/jacoco/) - Code coverage report for JVM languages.
 * [Maven Enforcer Plugin](http://maven.apache.org/enforcer/maven-enforcer-plugin/) Bans certain dependencies and ensures minimum Maven version is met.
+* [Maven Source Plugin](https://maven.apache.org/plugins/maven-source-plugin/) - Generates source JAR file.
 
 ## Reporting Plugins 
 
