@@ -7,12 +7,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.3.RELEASE</version>
+        <version>1.5.6.RELEASE</version>
     </parent>
 
     <groupId>com.github.choonchernlim</groupId>
     <artifactId>spring-boot-ci</artifactId>
-    <version>0.2.2-SNAPSHOT</version>
+    <version>0.2.2</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot CI</name>
@@ -42,6 +42,10 @@
         <developerConnection>scm:git:git@github.com:choonchernlim/spring-boot-ci.git</developerConnection>
         <url>git@github.com:choonchernlim/spring-boot-ci.git</url>
     </scm>
+
+    <prerequisites>
+        <maven>${maven.version}</maven>
+    </prerequisites>
 
     <properties>
         <java.version>1.8</java.version>
@@ -152,6 +156,16 @@
                     <groupId>org.codehaus.groovy</groupId>
                     <artifactId>groovy-eclipse-compiler</artifactId>
                     <version>${groovy-eclipse-compiler.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -337,8 +351,6 @@
                     Xalan, Xerces and Xml-APIs - Known to cause problem when deployed to server. Use the ones
                     provided by server.
                     See http://stackoverflow.com/questions/11677572/dealing-with-xerces-hell-in-java-maven
-
-                    Joda Time - Use Java 8's built-in Date and Time API.
                     -->
                     <execution>
                         <id>enforce-banned-dependencies</id>
@@ -353,7 +365,6 @@
                                         <exclude>xalan</exclude>
                                         <exclude>xerces</exclude>
                                         <exclude>xml-apis</exclude>
-                                        <exclude>joda-time</exclude>
                                     </excludes>
                                 </bannedDependencies>
                             </rules>

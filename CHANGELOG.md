@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.2.2 - 2017-08-02
+
+* Configured Jacoco to work.
+* Removed `joda-time` from banned dependencies because it is too restricting.
+* Updated dependencies.
+
+```
+PARENT
+org.springframework.boot:spring-boot-starter-parent  1.5.3.RELEASE -> 1.5.6.RELEASE
+```
+
 ## 0.2.1 - 2017-05-30
 
 * Configured `mvn package` to generate source JAR file.
