@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.3 - 2017-08-07
+
+* Configured Maven GPG Plugin to work with GPG 2.1 so that it will pick up `gpg.passphrase` defined in `settings.xml`.
+
 ## 0.2.2 - 2017-08-02
 
 * Configured Jacoco to work.

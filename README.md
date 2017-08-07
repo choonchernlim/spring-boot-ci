@@ -18,7 +18,7 @@ This parent POM:-
     <parent>
         <groupId>com.github.choonchernlim</groupId>
         <artifactId>spring-boot-ci</artifactId>
-        <version>0.2.2</version>
+        <version>0.2.3</version>
     </parent>
     ...
 </project>
@@ -33,13 +33,13 @@ mvn clean test site
 ### Deploy to Sonatype OSSRH
 
 ```xml
-mvn clean deploy -Possrh-deploy
+mvn clean deploy -P ossrh,ossrh-deploy
 ```
 
 ###  Deploy Site to GitHub
 
 ```xml
-mvn clean test site -Possrh-deploy
+mvn clean test site -P ossrh,ossrh-deploy
 ```
 
 ## Build Plugins 

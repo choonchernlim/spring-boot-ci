@@ -12,7 +12,7 @@
 
     <groupId>com.github.choonchernlim</groupId>
     <artifactId>spring-boot-ci</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot CI</name>
@@ -676,6 +676,15 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <!--
+                                    GPG 2.1 requires this setting to pick up `gpg.passphrase` defined in `settings.xml`.
+                                    -->
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
