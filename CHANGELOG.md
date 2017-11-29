@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.2.4 - 2017-11-29
+
+```
+PARENT
+org.springframework.boot:spring-boot-starter-parent  1.5.6.RELEASE -> 1.5.9.RELEASE
+
+PROPERTIES
+maven-surefire-report-plugin ......................... 2.20 -> 2.20.1
+org.codehaus.mojo:findbugs-maven-plugin .............. 3.0.4 -> 3.0.5
+```
+
 ## 0.2.3 - 2017-08-07
 
 * Configured Maven GPG Plugin to work with GPG 2.1 so that it will pick up `gpg.passphrase` defined in `settings.xml`.
