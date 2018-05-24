@@ -246,13 +246,17 @@
                         <org.jboss.logging.provider>slf4j</org.jboss.logging.provider>
                     </systemPropertyVariables>
 
-                    <!-- The first 3 patterns are SureFire's default. Adding Spock's `*Spec` default pattern. -->
+                    <!-- The first 4 patterns are SureFire's default. Adding Spock's `*Spec` default pattern. -->
                     <includes>
                         <include>**/Test*.class</include>
                         <include>**/*Test.class</include>
+                        <include>**/*Tests.class</include>
                         <include>**/*TestCase.class</include>
                         <include>**/*Spec.class</include>
                     </includes>
+                    <excludes>
+                        <exclude>**/Abstract*.class</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
 
