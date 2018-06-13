@@ -1,15 +1,15 @@
 # Change Log
 
-## 0.3.0 - 2018-X-X
+## 0.3.0 - 2018-06-13
 
-* Upgraded `spring-boot` from v1.x ro v2.x.
+* Upgraded `spring-boot` from v1.x to v2.x.
 
 ```
 PARENT
 org.springframework.boot:spring-boot-starter-parent  1.5.9.RELEASE -> 2.0.2.RELEASE
 
 PLUGINS
-maven-pmd-plugin ....................................... 3.8 -> 3.9.0
+maven-pmd-plugin ...................................... 3.8 -> 3.10.0
 maven-surefire-report-plugin ....................... 2.20.1 -> 2.21.0
 org.jacoco:jacoco-maven-plugin ....................... 0.7.9 -> 0.8.1
 
