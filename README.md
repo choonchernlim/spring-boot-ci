@@ -33,13 +33,13 @@ mvn clean test site
 ### Deploy to Sonatype OSSRH
 
 ```xml
-mvn clean deploy -P ossrh,ossrh-deploy
+mvn clean deploy -P ossrh
 ```
 
 ###  Deploy Site to GitHub
 
 ```xml
-mvn clean test site -P ossrh,ossrh-deploy
+mvn clean test site -P ossrh
 ```
 
 ## Build Plugins 

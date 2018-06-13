@@ -580,10 +580,10 @@
 
     <profiles>
         <!--
-        `ossrh-deploy` profile pushes binary, source code and javadoc to Sonatype OSSRH and generated site to GitHub.
+        `ossrh` profile pushes binary, source code and javadoc to Sonatype OSSRH and generated site to GitHub.
         -->
         <profile>
-            <id>ossrh-deploy</id>
+            <id>ossrh</id>
             <build>
                 <plugins>
                     <!--
