@@ -1,5 +1,18 @@
 # Change Log
 
+## 0.3.1 - 2018-08-15
+
+* Upgraded `spring-boot` from `2.0.4.RELEASE` to take advantage of Spring Core `5.0.8.RELEASE`, which fixes URI encoding problem. See https://jira.spring.io/browse/SPR-17039.
+
+```
+
+${groovy-eclipse-compiler.version} ............. 2.9.2-01 -> 3.0.0-01
+${groovy-eclipse-batch.version} ............... 2.4.3-01 -> 2.4.15-01
+${cglib-nodep.version} ............................... 3.2.6 -> 3.2.7
+${maven-project-info-reports-plugin.version} ........... 2.9 -> 3.0.0
+${maven-surefire-report-plugin.version} ............ 2.21.0 -> 2.22.0
+```
+
 ## 0.3.0 - 2018-06-13
 
 * Upgraded `spring-boot` from v1.x to v2.x.
