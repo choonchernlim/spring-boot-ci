@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.3.2 - 2018-08-16
+
+* BUG - `java.lang.NoClassDefFoundError: org/apache/maven/doxia/siterenderer/DocumentContent` when running `mvn site`.
+
 ## 0.3.1 - 2018-08-15
 
 * Upgraded `spring-boot` from `2.0.4.RELEASE` to take advantage of Spring Core `5.0.8.RELEASE`, which fixes URI encoding problem. See https://jira.spring.io/browse/SPR-17039.

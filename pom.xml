@@ -13,7 +13,7 @@
 
     <groupId>com.github.choonchernlim</groupId>
     <artifactId>spring-boot-ci</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot CI</name>
@@ -64,6 +64,14 @@
 
         <!-- Dependency versions (only those that are not defined in `spring-boot-starter-parent`) -->
         <cglib-nodep.version>3.2.7</cglib-nodep.version>
+
+        <!--
+        TODO LIMC remove this when Spring Boot updates `maven-site-plugin.version` to 3.7.1 or greater.
+         
+        Spring Boot 2.0.4 uses v3.6, which causes `java.lang.NoClassDefFoundError: org/apache/maven/doxia/siterenderer/DocumentContent`
+        when running `mvn site`. Hence, override Spring Boot property to use 
+        -->
+        <maven-site-plugin.version>3.7.1</maven-site-plugin.version>
 
         <!-- Plugin versions (only those that are not defined in `spring-boot-starter-parent`) -->
         <jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
@@ -424,7 +432,6 @@
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <configuration>
                     <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
                 </configuration>
             </plugin>
 
@@ -579,6 +586,7 @@
     </repositories>
 
     <pluginRepositories>
+        <!-- To pick up latest Groovy-related artifacts -->
         <pluginRepository>
             <id>bintray</id>
             <name>Groovy Bintray</name>
