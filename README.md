@@ -18,7 +18,7 @@ This parent POM:-
     <parent>
         <groupId>com.github.choonchernlim</groupId>
         <artifactId>spring-boot-ci</artifactId>
-        <version>0.3.1</version>
+        <version>0.3.2</version>
     </parent>
     ...
 </project>
