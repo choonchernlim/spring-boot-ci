@@ -1,5 +1,23 @@
 # Change Log
 
+## 0.4.0 - 2018-12-03
+
+* Configured Maven Surefire Plugin to always use JUnit as provider instead of accidentally detecting other test frameworks, such as TestNG.
+* Added Spock to "Dependency Management" block.
+* Spring Boot 2.1.1 no longer have `groovy-all`. See https://github.com/spring-projects/spring-boot/issues/15112  
+
+```
+org.springframework.boot:spring-boot-starter-parent  2.0.4.RELEASE -> 2.1.1.RELEASE
+
+${cglib-nodep.version} ............................... 3.2.7 -> 3.2.9
+${groovy-eclipse-batch.version} ............... 2.4.15-01 -> 2.5.4-01
+${maven-pmd-plugin.version} ........................ 3.10.0 -> 3.11.0
+${maven-jxr-plugin.version} ............................ 2.5 -> 3.0.0
+${maven-surefire-report-plugin.version} .......... 2.22.0 -> 3.0.0-M1
+${jacoco-maven-plugin.version} ....................... 0.8.1 -> 0.8.2
+${spock.version} ................... 1.1-groovy-2.4 -> 1.2-groovy-2.5
+```
+
 ## 0.3.2 - 2018-08-16
 
 * BUG - `java.lang.NoClassDefFoundError: org/apache/maven/doxia/siterenderer/DocumentContent` when running `mvn site`.
