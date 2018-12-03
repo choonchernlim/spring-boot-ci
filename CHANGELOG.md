@@ -4,7 +4,8 @@
 
 * Configured Maven Surefire Plugin to always use JUnit as provider instead of accidentally detecting other test frameworks, such as TestNG.
 * Added Spock to "Dependency Management" block.
-* Spring Boot 2.1.1 no longer have `groovy-all` due to 
+* Spring Boot 2.1.1 no longer have `groovy-all`. See https://github.com/spring-projects/spring-boot/issues/15112  
+
 ```
 org.springframework.boot:spring-boot-starter-parent  2.0.4.RELEASE -> 2.1.1.RELEASE
 
